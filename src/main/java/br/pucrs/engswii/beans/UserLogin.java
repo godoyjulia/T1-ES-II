@@ -1,8 +1,11 @@
 package br.pucrs.engswii.beans;
 
+import java.util.HashMap;
+
 public class UserLogin {
     String registrationNumber;
     String password;
+    HashMap<String, String> listaUsuariosLogin = new HashMap<String, String>();
 
 
     public String getRegistrationNumber() {
@@ -16,5 +19,14 @@ public class UserLogin {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void addUser(String id, String senha){
+        this.listaUsuariosLogin.put(id, senha);
+    }
+
+    public boolean logar(String id, String senha){
+        String s = listaUsuariosLogin.get(id);
+        return s == senha;
     }
 }

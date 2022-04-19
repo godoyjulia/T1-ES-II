@@ -1,16 +1,10 @@
 package br.pucrs.engswii.beans;
 
-public class User {
+public class UserRegistrationReply {
 
-    String name;
-    String registrationNumber;
-	String password;
-    
-	public User(String registrationNumber, String name, String password){
-        this.registrationNumber = registrationNumber;
-        this.name = name;
-		this.password = password;
-    }
+	String name;
+	String registrationNumber;
+	String registrationStatus;
 
 	public String getName() {
 		return name;
@@ -24,4 +18,11 @@ public class User {
 	public void setRegistrationNumber(String registrationNumber) {
 		this.registrationNumber = registrationNumber;
 	}
+	public String getRegistrationStatus() {
+		return registrationStatus;
+	}
+	public void setRegistrationStatus(String registrationStatus) {
+		this.registrationStatus = registrationStatus;
+	}
+
 }
