@@ -5,7 +5,28 @@ import java.util.HashMap;
 public class UserLogin {
     String registrationNumber;
     String password;
-    HashMap<String, String> listaUsuariosLogin = new HashMap<String, String>();
+    public HashMap<String, String> listaUsuariosLogin = new HashMap<String, String>();
+
+    private static UserLogin userLog = null;
+
+    public static UserLogin getInstance() {
+
+		if(userLog == null) {
+			userLog = new UserLogin();
+			return userLog;
+		}
+		else {
+			return userLog;
+		}
+	}
+
+	public void add(String regNum, String password) {
+		listaUsuariosLogin.put(regNum, password);
+	}
+
+
+
+
 
 
     public String getRegistrationNumber() {

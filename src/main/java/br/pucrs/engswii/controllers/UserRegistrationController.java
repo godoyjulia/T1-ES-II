@@ -29,6 +29,10 @@ public class UserRegistrationController {
 		userregreply.setRegistrationNumber(user.getRegistrationNumber());
 		userregreply.setRegistrationStatus("Successful");
 
+		// UserLogin userLogin = new UserLogin();
+		// userLogin.listaUsuariosLogin.put(user.getRegistrationNumber(), user.getPassword());
+
+
 		return userregreply;
 	}
 

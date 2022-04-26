@@ -19,17 +19,29 @@ public class UserLoginController {
 	//
 	//  @ResponseBody
 	@PostMapping("/login/user")
-	public UserLoginReply registerUser(@RequestBody User user) {
-		System.out.println("In registerUser");
+	public UserLoginReply loginUser(@RequestBody String registrationNumber, String password) {
+		System.out.println("In loginUser");
 		
-		UserRegistrationReply userregreply = new UserRegistrationReply();           
-		UserRegistration.getInstance().add(user);
+		UserLoginReply userlogreply = new UserLoginReply();           
+		//UserLogin.getInstance().add(user);
 		//We are setting the below value just to reply a message back to the caller
-		userregreply.setName(user.getName());
-		userregreply.setRegistrationNumber(user.getRegistrationNumber());
-		userregreply.setRegistrationStatus("Successful");
+		
+		// UserLogin userLogin = new UserLogin();
+		// String validPassword = userLogin.listaUsuariosLogin.get(registrationNumber);
 
-		return userregreply;
+		UserLogin.getInstance().add(registrationNumber, password);
+		String validPassword = UserLogin.getInstance().listaUsuariosLogin.get(registrationNumber);
+		
+		if (validPassword == null){
+			userlogreply.setLoginStatus("Invalid user");
+		}
+		else if (validPassword.equals(password)){
+			userlogreply.setLoginStatus("Logged in");
+		}
+		else{
+			userlogreply.setLoginStatus("Invalid password");
+		}
+		return userlogreply;
 	}
 
 }

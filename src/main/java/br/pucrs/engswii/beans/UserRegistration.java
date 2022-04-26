@@ -1,11 +1,13 @@
 package br.pucrs.engswii.beans;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class UserRegistration {
 
 	private List<User> userRecords;
+	public HashMap<String, String> listaUsuariosReg = new HashMap<String, String>();
 
 	private static UserRegistration userRegd = null;
 
@@ -26,6 +28,7 @@ public class UserRegistration {
 
 	public void add(User std) {
 		userRecords.add(std);
+		listaUsuariosReg.put(std.getRegistrationNumber(), std.getPassword());
 	}
 
 	public String upDateUser(User std) {
