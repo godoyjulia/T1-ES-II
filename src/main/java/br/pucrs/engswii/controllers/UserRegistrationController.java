@@ -24,10 +24,16 @@ public class UserRegistrationController {
 		
 		UserRegistrationReply userregreply = new UserRegistrationReply();           
 		UserRegistration.getInstance().add(user);
+		UserLogin.addUser(user.getRegistrationNumber(), user.getPassword());
+
 		//We are setting the below value just to reply a message back to the caller
 		userregreply.setName(user.getName());
 		userregreply.setRegistrationNumber(user.getRegistrationNumber());
 		userregreply.setRegistrationStatus("Successful");
+
+		System.out.println("user registration list: "+ UserRegistration.getUserRecords());
+
+		
 
 		// UserLogin userLogin = new UserLogin();
 		// userLogin.listaUsuariosLogin.put(user.getRegistrationNumber(), user.getPassword());

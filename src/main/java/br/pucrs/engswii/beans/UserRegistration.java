@@ -6,7 +6,7 @@ import java.util.List;
 
 public class UserRegistration {
 
-	private List<User> userRecords;
+	private static List<User> userRecords;
 	public HashMap<String, String> listaUsuariosReg = new HashMap<String, String>();
 
 	private static UserRegistration userRegd = null;
@@ -59,7 +59,7 @@ public class UserRegistration {
 		return "Delete un-successful";
 	}
 
-	public List<User> getUserRecords() {
+	public static List<User> getUserRecords() {
 		return userRecords;
 	}
 

@@ -19,8 +19,14 @@ public class UserLoginController {
 	//
 	//  @ResponseBody
 	@PostMapping("/login/user")
-	public UserLoginReply loginUser(@RequestBody String registrationNumber, String password) {
+	public UserLoginReply loginUser(@RequestBody UserLogin userLogin) {
 		System.out.println("In loginUser");
+		String registrationNumber = userLogin.getRegistrationNumber();
+		String password = userLogin.getPassword();
+
+		System.out.println("RegNumber: "+ registrationNumber);
+		System.out.println();
+		System.out.println("password: "+ password);
 		
 		UserLoginReply userlogreply = new UserLoginReply();           
 		//UserLogin.getInstance().add(user);
@@ -29,9 +35,13 @@ public class UserLoginController {
 		// UserLogin userLogin = new UserLogin();
 		// String validPassword = userLogin.listaUsuariosLogin.get(registrationNumber);
 
-		UserLogin.getInstance().add(registrationNumber, password);
-		String validPassword = UserLogin.getInstance().listaUsuariosLogin.get(registrationNumber);
-		
+		// UserLogin.getInstance().add(registrationNumber, password);
+		UserLogin.getInstance();
+		String validPassword = UserLogin.listaUsuariosLogin.get(registrationNumber);
+		// UserLogin.getInstance();
+		System.out.println("listaUsuariosLogin: "+ UserLogin.listaUsuariosLogin);
+		System.out.println("correct password: "+ validPassword);
+
 		if (validPassword == null){
 			userlogreply.setLoginStatus("Invalid user");
 		}
