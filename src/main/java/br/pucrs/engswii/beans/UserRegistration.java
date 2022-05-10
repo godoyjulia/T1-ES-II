@@ -7,7 +7,7 @@ import java.util.List;
 public class UserRegistration {
 
 	private static List<User> userRecords;
-	public HashMap<String, String> listaUsuariosReg = new HashMap<String, String>();
+	public static HashMap<String, String> listaUsuariosReg = new HashMap<String, String>();
 
 	private static UserRegistration userRegd = null;
 

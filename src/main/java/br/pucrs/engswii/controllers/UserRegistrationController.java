@@ -23,6 +23,12 @@ public class UserRegistrationController {
 		System.out.println("In registerUser");
 		
 		UserRegistrationReply userregreply = new UserRegistrationReply();           
+		String usuarioExiste = UserRegistration.listaUsuariosReg.get(user.getRegistrationNumber());
+
+		if (usuarioExiste != null){
+			userregreply.setRegistrationStatus("Unsuccessful");
+			return userregreply;
+		}
 		UserRegistration.getInstance().add(user);
 		UserLogin.addUser(user.getRegistrationNumber(), user.getPassword());
 
