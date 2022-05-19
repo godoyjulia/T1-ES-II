@@ -56,6 +56,20 @@ public class StudentRegistration {
 		return "Delete un-successful";
 	}
 
+	public Student getStudent(String registrationNumber){
+		for(int i=0; i<studentRecords.size(); i++)
+		{
+			Student stdn = studentRecords.get(i);
+			if(stdn.getRegistrationNumber().equals(registrationNumber)){
+				return studentRecords.get(i);
+			}
+		}
+
+		return null;
+
+
+	}
+
 	public List<Student> getStudentRecords() {
 		return studentRecords;
 	}
