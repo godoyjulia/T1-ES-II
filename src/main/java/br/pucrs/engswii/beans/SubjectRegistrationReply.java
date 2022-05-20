@@ -5,7 +5,7 @@ import java.util.List;
 public class SubjectRegistrationReply {
     String name;
     String id;
-    List<Character> schedule;
+    List<Character> schedules;
 	String registrationStatus;
     
     public String getName() {
@@ -20,11 +20,11 @@ public class SubjectRegistrationReply {
     public void setId(String id) {
         this.id = id;
     }
-    public List<Character> getSchedule() {
-        return schedule;
+    public List<Character> getSchedules() {
+        return schedules;
     }
-    public void setSchedule(List<Character> schedule) {
-        this.schedule = schedule;
+    public void setSchedules(List<Character> schedules) {
+        this.schedules = schedules;
     }
 	public String getRegistrationStatus() {
 		return registrationStatus;

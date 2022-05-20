@@ -4,12 +4,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.pucrs.engswii.beans.Subject;
 import br.pucrs.engswii.beans.SubjectRegistration;
 import br.pucrs.engswii.beans.SubjectRegistrationReply;
 import br.pucrs.engswii.beans.UserLogin;
 
+@RestController
 public class SubjectRegistrationController {
     
     @PostMapping("/register/subject")
@@ -24,7 +26,7 @@ public class SubjectRegistrationController {
 
         subjectReply.setName(subject.getName());
         subjectReply.setId(subject.getId());
-        subjectReply.setSchedule(subject.getSchedule());
+        subjectReply.setSchedules(subject.getSchedules());
         subjectReply.setRegistrationStatus("Successful");
 
         return new ResponseEntity<>(subjectReply, HttpStatus.OK);

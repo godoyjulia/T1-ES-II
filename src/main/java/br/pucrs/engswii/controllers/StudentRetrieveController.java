@@ -26,6 +26,7 @@ public class StudentRetrieveController {
 	//	@ResponseBody
 	@GetMapping("/student/allstudent")
 	public ResponseEntity<List<Student>> getAllStudents() {
+		System.out.println("In getAllStudents");   
 		if (!UserLogin.getInstance().isSomeoneLogged()){
 			System.out.println("Nenhum usuário logado.");
         	return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -33,9 +34,9 @@ public class StudentRetrieveController {
 		return new ResponseEntity<>(StudentRegistration.getInstance().getStudentRecords(), HttpStatus.OK);
 	}
 
-	@GetMapping("/student/{regdNum}")
+	@GetMapping("/student/id/{regdNum}")
 	public ResponseEntity<Student> getStudentById(@PathVariable("regdNum") String regdNum) {
-		System.out.println("In getSTudentById");   
+		System.out.println("In getStudentById");   
 		if (!UserLogin.getInstance().isSomeoneLogged()){
 			System.out.println("Nenhum usuário logado.");
         	return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -50,7 +51,7 @@ public class StudentRetrieveController {
         return new ResponseEntity<>(student, HttpStatus.OK);
 	}
 	
-	@GetMapping("/student/{name}")
+	@GetMapping("/student/name/{name}")
 	public ResponseEntity<List<Student>> getStudentByName(@PathVariable("name") String name) {
 		if (!UserLogin.getInstance().isSomeoneLogged()){
 			System.out.println("Nenhum usuário logado.");
@@ -60,8 +61,9 @@ public class StudentRetrieveController {
 		List<Student> students = StudentRegistration.getInstance().getStudentRecords();
 		List<Student> matches = new ArrayList<>();
 
+		String regex = ".*"+name+".*";
 		for (Student s: students){
-			if(Pattern.matches(name, s.getName())){
+			if(Pattern.matches(regex, s.getName())){
 				matches.add(s);
 			}
 		}

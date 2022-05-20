@@ -1,6 +1,5 @@
 package br.pucrs.engswii.controllers;
 
-import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +38,7 @@ public class UserLoginController {
 
 		// UserLogin.getInstance().add(registrationNumber, password);
 		// UserLogin.getInstance();
-		String validPassword = UserLogin.listaUsuariosLogin.get(registrationNumber);
+		String validPassword = UserLogin.getInstance().listaUsuariosLogin.get(registrationNumber);
 		// UserLogin.getInstance();
 		// System.out.println("listaUsuariosLogin: "+ UserLogin.listaUsuariosLogin);
 		// System.out.println("correct password: "+ validPassword);
@@ -48,6 +47,7 @@ public class UserLoginController {
 			userlogreply.setLoginStatus("Invalid user");
 		}
 		else if (validPassword.equals(password)){
+			UserLogin.getInstance().logIn(registrationNumber);
 			userlogreply.setLoginStatus("Logged in");
 			return new ResponseEntity<>(userlogreply, HttpStatus.OK);
 		}

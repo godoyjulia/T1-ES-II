@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class UserLogin {
     String registrationNumber;
     String password;
-    public static HashMap<String, String> listaUsuariosLogin = new HashMap<String, String>();
+    public HashMap<String, String> listaUsuariosLogin = new HashMap<String, String>();
 
     private static UserLogin userLog = null;
 
@@ -23,7 +23,7 @@ public class UserLogin {
 		}
 	}
 
-	public static void add(String regNum, String password) {
+	public void add(String regNum, String password) {
 		listaUsuariosLogin.put(regNum, password);
 	}
     public String getRegistrationNumber() {
@@ -37,10 +37,6 @@ public class UserLogin {
     }
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public static void addUser(String id, String senha){
-        listaUsuariosLogin.put(id, senha);
     }
 
     public void logIn(String registrationNumber){

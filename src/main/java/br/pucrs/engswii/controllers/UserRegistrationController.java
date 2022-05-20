@@ -1,6 +1,5 @@
 package br.pucrs.engswii.controllers;
 
-import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +32,7 @@ public class UserRegistrationController {
 			return new ResponseEntity<>(userregreply, HttpStatus.BAD_REQUEST);
 		}
 		UserRegistration.getInstance().add(user);
-		UserLogin.addUser(user.getRegistrationNumber(), user.getPassword());
+		UserLogin.getInstance().add(user.getRegistrationNumber(), user.getPassword());
 
 		//We are setting the below value just to reply a message back to the caller
 		userregreply.setName(user.getName());

@@ -3,16 +3,17 @@ package br.pucrs.engswii.beans;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Subject {
+public class SubjectEnrollment {
+    
     String name;
     String id;
-    List<Character> schedules;
+    Character schedule;
     
 
-    public Subject(String name, String id, ArrayList<Character> schedules) {
+    public SubjectEnrollment(String name, String id, Character schedule) {
         this.name = name;
         this.id = id;
-        this.schedules = schedules;
+        this.schedule = schedule;
     }
     public String getName() {
         return name;
@@ -26,14 +27,12 @@ public class Subject {
     public void setId(String id) {
         this.id = id;
     }
-    public List<Character> getSchedules() {
-        return schedules;
+    public Character getSchedule() {
+        return schedule;
     }
-    public void setSchedules(List<Character> schedules) {
-        this.schedules = schedules;
+    public void setSchedule(Character schedule) {
+        this.schedule = schedule;
     }
    
 
-
-    
 }
