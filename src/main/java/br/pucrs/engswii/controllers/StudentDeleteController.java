@@ -7,7 +7,10 @@ package br.pucrs.engswii.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.pucrs.engswii.beans.StudentRegistration;
+import br.pucrs.engswii.beans.UserLogin;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -18,9 +21,13 @@ public class StudentDeleteController {
 //
 //	@ResponseBody
 	@DeleteMapping("/delete/student/{regdNum}")
-	public String deleteStudentRecord(@PathVariable("regdNum") String regdNum) {
+	public ResponseEntity<String> deleteStudentRecord(@PathVariable("regdNum") String regdNum) {
 		System.out.println("In deleteStudentRecord");   
-		return StudentRegistration.getInstance().deleteStudent(regdNum);
+		if (!UserLogin.getInstance().isSomeoneLogged()){
+			System.out.println("Nenhum usuário logado.");
+        	return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		}
+		return new ResponseEntity<>(StudentRegistration.getInstance().deleteStudent(regdNum), HttpStatus.OK);
 	}
 
 }

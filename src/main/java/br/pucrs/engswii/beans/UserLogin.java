@@ -1,5 +1,6 @@
 package br.pucrs.engswii.beans;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UserLogin {
@@ -8,6 +9,8 @@ public class UserLogin {
     public static HashMap<String, String> listaUsuariosLogin = new HashMap<String, String>();
 
     private static UserLogin userLog = null;
+
+    ArrayList<String> loggedInUsers = new ArrayList<>();
 
     public static UserLogin getInstance() {
 
@@ -40,8 +43,15 @@ public class UserLogin {
         listaUsuariosLogin.put(id, senha);
     }
 
-    public boolean logar(String id, String senha){
-        String s = listaUsuariosLogin.get(id);
-        return s == senha;
+    public void logIn(String registrationNumber){
+        loggedInUsers.add(registrationNumber);
+    }
+
+    public void logOut (String registrationNumber){
+        loggedInUsers.remove(registrationNumber);
+    }
+
+    public boolean isSomeoneLogged(){
+        return loggedInUsers.size() > 0;
     }
 }

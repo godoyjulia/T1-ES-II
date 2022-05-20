@@ -2,6 +2,8 @@ package br.pucrs.engswii.controllers;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 //import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,14 +21,14 @@ public class UserLoginController {
 	//
 	//  @ResponseBody
 	@PostMapping("/login/user")
-	public UserLoginReply loginUser(@RequestBody UserLogin userLogin) {
+	public ResponseEntity<UserLoginReply> loginUser(@RequestBody UserLogin userLogin) {
 		System.out.println("In loginUser");
 		String registrationNumber = userLogin.getRegistrationNumber();
 		String password = userLogin.getPassword();
 
-		System.out.println("RegNumber: "+ registrationNumber);
-		System.out.println();
-		System.out.println("password: "+ password);
+		// System.out.println("RegNumber: "+ registrationNumber);
+		// System.out.println();
+		// System.out.println("password: "+ password);
 		
 		UserLoginReply userlogreply = new UserLoginReply();           
 		//UserLogin.getInstance().add(user);
@@ -36,22 +38,23 @@ public class UserLoginController {
 		// String validPassword = userLogin.listaUsuariosLogin.get(registrationNumber);
 
 		// UserLogin.getInstance().add(registrationNumber, password);
-		UserLogin.getInstance();
+		// UserLogin.getInstance();
 		String validPassword = UserLogin.listaUsuariosLogin.get(registrationNumber);
 		// UserLogin.getInstance();
-		System.out.println("listaUsuariosLogin: "+ UserLogin.listaUsuariosLogin);
-		System.out.println("correct password: "+ validPassword);
+		// System.out.println("listaUsuariosLogin: "+ UserLogin.listaUsuariosLogin);
+		// System.out.println("correct password: "+ validPassword);
 
 		if (validPassword == null){
 			userlogreply.setLoginStatus("Invalid user");
 		}
 		else if (validPassword.equals(password)){
 			userlogreply.setLoginStatus("Logged in");
+			return new ResponseEntity<>(userlogreply, HttpStatus.OK);
 		}
 		else{
 			userlogreply.setLoginStatus("Invalid password");
 		}
-		return userlogreply;
+		return new ResponseEntity<>(userlogreply, HttpStatus.BAD_REQUEST);
 	}
 
 }

@@ -2,6 +2,8 @@ package br.pucrs.engswii.controllers;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 //import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +21,11 @@ public class StudentRegistrationController {
 	//
 	//  @ResponseBody
 	@PostMapping("/register/student")
-	public StudentRegistrationReply registerStudent(@RequestBody Student student) {
+	public ResponseEntity<StudentRegistrationReply> registerStudent(@RequestBody Student student) {
+		if (!UserLogin.getInstance().isSomeoneLogged()){
+			System.out.println("Nenhum usuário logado.");
+        	return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		}
 		System.out.println("In registerStudent");
 		StudentRegistrationReply stdregreply = new StudentRegistrationReply();           
 		StudentRegistration.getInstance().add(student);
@@ -29,7 +35,7 @@ public class StudentRegistrationController {
 		stdregreply.setRegistrationNumber(student.getRegistrationNumber());
 		stdregreply.setRegistrationStatus("Successful");
 
-		return stdregreply;
+		return new ResponseEntity<>(stdregreply, HttpStatus.OK);
 	}
 
 }

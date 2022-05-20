@@ -2,6 +2,8 @@ package br.pucrs.engswii.controllers;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 //import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,15 +21,16 @@ public class UserRegistrationController {
 	//
 	//  @ResponseBody
 	@PostMapping("/register/user")
-	public UserRegistrationReply registerUser(@RequestBody User user) {
+	public ResponseEntity<UserRegistrationReply> registerUser(@RequestBody User user) {
 		System.out.println("In registerUser");
 		
 		UserRegistrationReply userregreply = new UserRegistrationReply();           
 		String usuarioExiste = UserRegistration.listaUsuariosReg.get(user.getRegistrationNumber());
 
 		if (usuarioExiste != null){
+			System.out.println("Usuário com id já existente.");
 			userregreply.setRegistrationStatus("Unsuccessful");
-			return userregreply;
+			return new ResponseEntity<>(userregreply, HttpStatus.BAD_REQUEST);
 		}
 		UserRegistration.getInstance().add(user);
 		UserLogin.addUser(user.getRegistrationNumber(), user.getPassword());
@@ -37,15 +40,7 @@ public class UserRegistrationController {
 		userregreply.setRegistrationNumber(user.getRegistrationNumber());
 		userregreply.setRegistrationStatus("Successful");
 
-		System.out.println("user registration list: "+ UserRegistration.getUserRecords());
-
-		
-
-		// UserLogin userLogin = new UserLogin();
-		// userLogin.listaUsuariosLogin.put(user.getRegistrationNumber(), user.getPassword());
-
-
-		return userregreply;
+		return new ResponseEntity<>(userregreply, HttpStatus.OK);
 	}
 
 }
